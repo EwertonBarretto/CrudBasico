@@ -1,46 +1,71 @@
 import React, { Component } from "react";
-import index from "../Caduser/index";
+import Cadindex from "../Caduser/index";
+import $ from "jquery";
 /* eslint-disable */
 
 class home extends Component {
   constructor() {
     super();
     this.state = {
-      ListaUsuario: [
-        {
-          nome: "carlinho",
-          email: "c@linhos.com"
-        }
-      ]
+      ListaUsuario: [{}],
+      cadastrar: false
     };
   }
 
+  getList() {
+    if (!this.state.cadastrar) {
+      $.ajax({
+        url: "http://cdc-react.herokuapp.com/api/autores/",
+        dataType: "json",
+        success: function(resposta) {
+          this.setState({ ListaUsuario: resposta });
+        }.bind(this)
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    this.getList();
+  }
+
+  componentWillMount() {
+    this.getList();
+  }
+
   render() {
-    return (
-      <div>
+    if (this.state.cadastrar) {
+      return (
+        <Cadindex setCadastrar={cadastrar => this.setState({ cadastrar })} />
+      );
+    } else {
+      return (
         <div>
-          <button onClick={() => alert("uhuhu")}>Novo Cadastr</button>
-        </div>
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.ListaUsuario.map((user: any) => (
+          <div>
+            <button onClick={() => this.setState({ cadastrar: true })}>
+              Novo Cadastr
+            </button>
+          </div>
+          <div>
+            <table>
+              <thead>
                 <tr>
-                  <td>{user.nome}</td>
-                  <td>{user.email}</td>
+                  <th>Nome</th>
+                  <th>email</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {this.state.ListaUsuario.map((user: any) => (
+                  <tr key={user.id}>
+                    <td>{user.nome}</td>
+                    <td>{user.email}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
