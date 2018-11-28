@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Cadindex from "../Caduser/index";
+import { ListUser, BtnCadastrar } from "./homeComponents";
 import $ from "jquery";
 /* eslint-disable */
 
@@ -12,25 +13,9 @@ class home extends Component {
     };
   }
 
-  getList() {
-    if (!this.state.cadastrar) {
-      $.ajax({
-        url: "http://cdc-react.herokuapp.com/api/autores/",
-        dataType: "json",
-        success: function(resposta) {
-          this.setState({ ListaUsuario: resposta });
-        }.bind(this)
-      });
-    }
-  }
-
-  componentDidUpdate() {
-    this.getList();
-  }
-
-  componentWillMount() {
-    this.getList();
-  }
+  // handleLoginClick() {
+  //   this.setState(cadastrar);
+  // }
 
   render() {
     if (this.state.cadastrar) {
@@ -40,29 +25,10 @@ class home extends Component {
     } else {
       return (
         <div>
-          <div>
-            <button onClick={() => this.setState({ cadastrar: true })}>
-              Novo Cadastr
-            </button>
-          </div>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.ListaUsuario.map((user: any) => (
-                  <tr key={user.id}>
-                    <td>{user.nome}</td>
-                    <td>{user.email}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <BtnCadastrar
+            setCadastrar={cadastrar => this.setState({ cadastrar })}
+          />
+          <ListUser />
         </div>
       );
     }
