@@ -1,23 +1,21 @@
 import React, { Component } from "react";
 
-class inputGeneric extends Component {
-  constructor() {
-    this.super();
-    this.state = {
-
-    )};
-  }
-
+class InputGeneric extends Component {
   render() {
     return (
       <div>
+        <label>
+        {this.props.label}
         <input
           name={this.props.name}
           type={this.props.type}
-          value={this.state.name}
-          onChange={event => this.setState({ name: event.target.value })}
+          value={this.props.value}
+          onChange={this.props.onChange}
         />
+         </label>
       </div>
     );
   }
 }
+
+export {InputGeneric};

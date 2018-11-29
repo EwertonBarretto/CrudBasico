@@ -13,10 +13,6 @@ class home extends Component {
     };
   }
 
-  // handleLoginClick() {
-  //   this.setState(cadastrar);
-  // }
-
   render() {
     if (this.state.cadastrar) {
       return (
