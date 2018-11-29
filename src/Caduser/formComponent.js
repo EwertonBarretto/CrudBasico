@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import {cadastrarUser} from '../Functions/AjaxFunc'
-import {InputGeneric} from '../ComponentGeneric/components'
+//import { cadastrarUser } from "../Functions/AjaxFunc";
+import { InputGeneric } from "../ComponentGeneric/components";
 import $ from "jquery";
 
 class FormularioCad extends Component {
@@ -9,36 +9,31 @@ class FormularioCad extends Component {
     this.state = { name: "", email: "" };
   }
 
-  // cadastrarUser() {
-  //   $.ajax({
-  //     url: "http://cdc-react.herokuapp.com/api/autores/",
-  //     dataType: "json",
-  //     contentType: "application/json",
-  //     type: "post",
-  //     data: JSON.stringify({
-  //       nome: this.state.name,
-  //       email: this.state.email,
-  //       senha: "123"
-  //     }),
-  //     success: (resposta: any) => {
-  //       console.log("sucesso");
-  //       this.setState({ name: "", email: "" });
-  //     },
-  //     error: () => {
-  //       console.log("erro");
-  //     }
-  //   });
-  // }
+  cadastrarUser() {
+    $.ajax({
+      url: "http://cdc-react.herokuapp.com/api/autores/",
+      dataType: "json",
+      contentType: "application/json",
+      type: "post",
+      data: JSON.stringify({
+        nome: this.state.name,
+        email: this.state.email,
+        senha: "123"
+      }),
+      success: (resposta: any) => {
+        console.log("sucesso");
+      },
+      error: () => {
+        console.log("erro");
+      }
+    });
+  }
 
   handleConfirmClick() {
-    var retorno = cadastrarUser(this);
-    if (retorno) {
-      this.setState({ name: '', email: ''});
-      this.handleClick();
-    }
-    else if (retorno === false)
-      alert("ERRO AO SALVAR");
+    this.cadastrarUser(this);
 
+    this.setState({ name: "", email: "" });
+    this.handleClick();
   }
 
   handleClick() {
@@ -48,11 +43,13 @@ class FormularioCad extends Component {
   render() {
     return (
       <div className="wrap-contact3">
-        <InputGeneric  
+        <InputGeneric
+          label="Nome:"
           type="text"
-            name="inptNome"
-            value={this.state.name}
-            onChange={event => this.setState({ name: event.target.value })}/>
+          name="inptNome"
+          value={this.state.name}
+          onChange={event => this.setState({ name: event.target.value })}
+        />
         {/* <label>
           Nome:
           <input

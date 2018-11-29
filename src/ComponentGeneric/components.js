@@ -5,17 +5,17 @@ class InputGeneric extends Component {
     return (
       <div>
         <label>
-        {this.props.label}
-        <input
-          name={this.props.name}
-          type={this.props.type}
-          value={this.props.value}
-          onChange={this.props.onChange}
-        />
-         </label>
+          {this.props.label}
+          <input
+            name={this.props.name}
+            type={this.props.type}
+            value={this.props.value}
+            onChange={this.props.onChange}
+          />
+        </label>
       </div>
     );
   }
 }
 
-export {InputGeneric};
+export { InputGeneric };
