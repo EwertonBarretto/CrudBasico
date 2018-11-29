@@ -50,25 +50,14 @@ class FormularioCad extends Component {
           value={this.state.name}
           onChange={event => this.setState({ name: event.target.value })}
         />
-        {/* <label>
-          Nome:
-          <input
-            type="text"
-            name="inptNome"
-            value={this.state.name}
-            onChange={event => this.setState({ name: event.target.value })}
-          />
-        </label> */}
         <br />
-        <label>
-          Email:
-          <input
-            type="text"
-            name="inptEmail"
-            value={this.state.email}
-            onChange={event => this.setState({ email: event.target.value })}
-          />
-        </label>
+        <InputGeneric
+          label="Email:"
+          type="text"
+          name="inptEmail"
+          value={this.state.email}
+          onChange={event => this.setState({ email: event.target.value })}
+        />
         <br />
         <input
           className="contact3-form-btn"
